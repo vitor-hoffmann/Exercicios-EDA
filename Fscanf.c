@@ -10,17 +10,16 @@ int main(){
         int age;
         float salary;
     };
-
+    struct employ e;
     arquivo = fopen("arquivo.dat", "r");
-    if (arquivo == NULL){
-        printf("Não foi possivel abrir o arquivo");
+    if (arquivo == NULL) {
+        puts("Não foi possivel abrir o arquivo");
         exit(0);
     }
-    while(1){
-        ch = fgetc(arquivo);
-        if (ch == EOF) exit(0);
-        printf("%c", ch);
+    while (fscanf(arquivo, "%s %d %f", e.name, e.age, e.salary) != EOF){
+        printf("%s %d %0.2f\n", e.name, e.age, e.salary);
     }
+    fclose(arquivo);
 
     return 0;
 }
