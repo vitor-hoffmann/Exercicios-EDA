@@ -1,6 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <wchar.h>
+
+const wchar_t mapa_acentos[][2] = {
+    { L'á', L'a' }, { L'à', L'a' }, { L'ã', L'a' }, { L'â', L'a' },
+    { L'é', L'e' }, { L'è', L'e' }, { L'ẽ', L'e' }, { L'ê', L'e' },
+    { L'í', L'i' }, { L'ì', L'i' }, { L'ĩ', L'i' }, { L'î', L'i' },
+    { L'ó', L'o' }, { L'ò', L'o' }, { L'õ', L'o' }, { L'ô', L'o' },
+    { L'ú', L'u' }, { L'ù', L'u' }, { L'ũ', L'u' }, { L'û', L'u' },
+    { L'ç', L'c' }
+};
 
 void word2vec(const char *txtentrada){
     char ch;
@@ -31,22 +41,21 @@ void word2vec(const char *txtentrada){
     fclose(saida);
     ordenadas = fopen("ordenadas.txt", "r");
     saidacorreta = fopen("arquivocompleto.txt", "w");
-
     while (fscanf(ordenadas, "%s", words[word_count]) != EOF) {
-        int is_duplicate = 0;
-        for (int i = 0; i < word_count; i++) {
-            if (strcmp(words[word_count], words[i]) == 0) {
-                is_duplicate = 1;
-                break;
+        if (strlen(words[word_count]) > 3) {
+            int is_duplicate = 0;
+            for (int i = 0; i < word_count; i++) {
+                if (strcmp(words[word_count], words[i]) == 0) {
+                    is_duplicate = 1;
+                    break;
+                }
             }
-        }
-        if (!is_duplicate) {
-            if (fgetc(ordenadas) != EOF && strlen(words[word_count]) >= 5){
+            if (!is_duplicate) {
                 fprintf(saidacorreta, "%s\n", words[word_count]);
+                word_count++;
             }
-            word_count++;
         }
-    }
+}
     fclose(saidacorreta);
     fclose(ordenadas);
 }
