@@ -4,9 +4,8 @@
 #include <wchar.h>
 
 void word2vec(const char *txtentrada){
-    char ch;
-    char words[1000][50];
-    int word_count = 0;
+    char ch, ca;
+    int word_count = 0, p = 0, c = 0;
     FILE *saida, *entrada, *ordenadas, *saidacorreta;
     entrada = fopen(txtentrada, "r");
     saida = fopen("ordenadas.txt", "w");
@@ -24,10 +23,15 @@ void word2vec(const char *txtentrada){
             ch += 32;
             fputc(ch, saida);
         }
+        else if (ch == ' '){
+            fputc('\n', saida);
+            p++;
+        }
         else{
             fputc(ch, saida);
         }
     }
+    char words[p][50];
     fclose(entrada);
     fclose(saida);
     ordenadas = fopen("ordenadas.txt", "r");
