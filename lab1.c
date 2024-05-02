@@ -50,7 +50,7 @@ void word2vec(const char *txtentrada){
                 word_count++;
             }
         }
-}
+    }
     fclose(saidacorreta);
     fclose(ordenadas);
 }
