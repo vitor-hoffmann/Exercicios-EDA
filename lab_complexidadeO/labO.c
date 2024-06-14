@@ -19,7 +19,7 @@ int main(){
     char opcao;
     srand(time(NULL));
 
-    input = fopen("testes.txt", "r");
+    input = fopen("testes2.txt", "r");
     while (1){
         printf("Digite sua opcao: T, R, S\n");
         scanf("%c", &opcao);
